@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow: hidden;
+    background: #f57120;
+}
+
+.details {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(32, 32, 32, 0.8);
+  padding: 8px 16px;
+  border-radius: 0 4px 4px 0;
+  text-align: center;
+  position: absolute;
+  bottom: 24px;
+  z-index: 100;
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  outline: none;
+}
