@@ -61,6 +61,7 @@ const sphereBody = new CANNON.Body({
   position: new CANNON.Vec3(0, 3, 0),
   shape: sphereShape
 })
+sphereBody.applyLocalForce(new CANNON.Vec3(150, 0, 0), new CANNON.Vec3(0, 0, 0))
 world.addBody(sphereBody)
 
 // Floor
@@ -178,23 +179,25 @@ let oldElapsedTime = 0
 
 const tick = () =>
 {
-    const elapsedTime = clock.getElapsedTime()
-    const deltaTime = elapsedTime - oldElapsedTime
-    oldElapsedTime = elapsedTime
+  const elapsedTime = clock.getElapsedTime()
+  const deltaTime = elapsedTime - oldElapsedTime
+  oldElapsedTime = elapsedTime
 
-    // Update physics world
-    world.step(1 / 60, deltaTime, 3)
+  // Update physics world
+  sphereBody.applyForce(new CANNON.Vec3(-0.5, 0, 0), sphereBody.position)
 
-    sphere.position.copy(sphereBody.position)
+  world.step(1 / 60, deltaTime, 3)
 
-    // Update controls
-    controls.update()
+  sphere.position.copy(sphereBody.position)
 
-    // Render
-    renderer.render(scene, camera)
+  // Update controls
+  controls.update()
 
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
+  // Render
+  renderer.render(scene, camera)
+
+  // Call tick again on the next frame
+  window.requestAnimationFrame(tick)
 }
 
 tick()
