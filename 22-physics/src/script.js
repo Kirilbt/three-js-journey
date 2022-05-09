@@ -31,8 +31,23 @@ debugOject.createBox = () => {
       z: (Math.random() - 0.5) * 3,
     })
 }
-gui.add(debugOject, 'createSphere')
-gui.add(debugOject, 'createBox')
+
+debugOject.reset = () => {
+  for (const object of objectsToUpdate) {
+    // Remove body
+    object.body.removeEventListener('collide', playHitSound)
+    world.removeBody(object.body)
+    // Remove mesh
+    scene.remove(object.mesh)
+    // Empty array
+  }
+  objectsToUpdate.splice(0, objectsToUpdate.length)
+}
+
+
+gui.add(debugOject, 'createSphere').name('Create Sphere')
+gui.add(debugOject, 'createBox').name('Create Box')
+gui.add(debugOject, 'reset').name('Reset')
 
 /**
  * Base
@@ -52,6 +67,7 @@ const playHitSound = (collision) => {
   const impactStrength = collision.contact.getImpactVelocityAlongNormal()
 
   if(impactStrength > 1.5) {
+    hitSound.volume = impactStrength > 5 ? 1 : 0.3
     hitSound.currentTime = 0
     hitSound.play()
   }
@@ -250,6 +266,7 @@ const createSphere = (radius, position) => {
     material: defaultMaterial
   })
   body.position.copy(position)
+  body.addEventListener('collide', playHitSound)
   world.addBody(body)
 
   // Save in objects to update
