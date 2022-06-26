@@ -20,9 +20,21 @@ const scene = new THREE.Scene()
  */
 const testSphere = new THREE.Mesh(
     new THREE.SphereGeometry(1, 32, 32),
-    new THREE.MeshBasicMaterial()
+    new THREE.MeshStandardMaterial()
 )
 scene.add(testSphere)
+
+/**
+ * Lights
+ */
+const directionalLight = new THREE.DirectionalLight('#fff', 3)
+directionalLight.position.set(0.25, 3, -2.25)
+scene.add(directionalLight)
+
+gui.add(directionalLight, 'intensity').min(0).max(10).step(0.001).name('lightIntensity')
+gui.add(directionalLight.position, 'x').min(-5).max(5).step(0.001).name('lightX')
+gui.add(directionalLight.position, 'y').min(-5).max(5).step(0.001).name('lightY')
+gui.add(directionalLight.position, 'z').min(-5).max(5).step(0.001).name('lightZ')
 
 /**
  * Sizes
@@ -67,6 +79,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.physicallyCorrectLights = true
 
 /**
  * Animate
