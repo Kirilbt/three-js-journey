@@ -2,6 +2,12 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
+import { GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+/**
+ * Loaders
+ */
+const gltfLoader = new GLTFLoader()
 
 /**
  * Base
@@ -23,6 +29,21 @@ const testSphere = new THREE.Mesh(
     new THREE.MeshStandardMaterial()
 )
 scene.add(testSphere)
+
+/**
+ * Model
+ */
+ gltfLoader.load(
+  '/models/FlightHelmet/glTF/FlightHelmet.gltf',
+  (gltf) => {
+    gltf.scene.scale.set(10, 10, 10)
+    gltf.scene.position.set(0, -4, 0)
+    gltf.scene.rotation.y = Math.PI * 0.5
+    scene.add(gltf.scene)
+
+    gui.add(gltf.scene.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.001).name('rotation')
+  }
+ )
 
 /**
  * Lights
