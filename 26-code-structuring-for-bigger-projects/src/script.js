@@ -1,36 +1,5 @@
-class Robot {
-  constructor(name, legs) {
-    this.name = name
-    this.legs = legs
-    console.log(`I am ${this.name}. Thank you Creator`)
-
-    this.sayHi()
-  }
-
-  sayHi() {
-    console.log(`Hello! My name is ${this.name}`)
-  }
-}
-
-class FlyingRobot extends Robot {
-  constructor(name, legs) {
-    super(name, legs)
-
-    super.sayHi()
-  }
-
-  sayHi() {
-    console.log(`I'm ${this.name} and I can fly`)
-  }
-
-  takeOff() {
-    console.log(`${this.name}: I'm taking off!`);
-  }
-
-  land() {
-    console.log(`${this.name}: I've landed`);
-  }
-}
+import Robot from './Robot.js'
+import FlyingRobot from './FlyingRobot.js'
 
 const wallE = new Robot('Wall-E', 0)
 const ultron = new FlyingRobot('Ultron', 2)
