@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Experience from "../Experience.js"
 import Environment from './Environment.js'
+import Floor from './Floor.js'
 
 export default class World {
   constructor() {
@@ -20,6 +21,7 @@ export default class World {
     // Wait for Resources
     this.resources.on('ready', () => {
       // Setup
+      this.floor = new Floor()
       this.environment = new Environment()
     })
   }
