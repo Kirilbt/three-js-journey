@@ -4,6 +4,7 @@ import Time from "./Utils/Time.js"
 import Camera from './Camera.js'
 import Renderer from './Renderer.js'
 import World from './World/World.js'
+import Debug from './Utils/Debug.js'
 import Resources from './Utils/Resources.js'
 import sources from './sources.js'
 
@@ -25,6 +26,7 @@ export default class Experience {
     console.log(this.canvas)
 
     // Setup
+    this.debug = new Debug()
     this.sizes = new Sizes()
     this.time = new Time()
     this.scene = new THREE.Scene()
