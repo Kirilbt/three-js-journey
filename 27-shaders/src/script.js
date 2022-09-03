@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 import testVertexShader from './shaders/test/vertex.glsl'
 import testFragmentShader from './shaders/test/fragment.glsl'
+import { DoubleSide } from 'three'
 
 /**
  * Base
@@ -43,8 +44,9 @@ geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
 const material = new THREE.ShaderMaterial({
   vertexShader: testVertexShader,
   fragmentShader: testFragmentShader,
+  side: DoubleSide,
   uniforms: {
-    uFrequency: { value: new THREE.Vector2(10, 5) },
+    uFrequency: { value: new THREE.Vector2(7, 3) },
     uTime: { value: 0 },
     uColor: { value: new THREE.Color('orange')},
     uTexture: { value: flagTexture }
