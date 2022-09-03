@@ -42,11 +42,19 @@ geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1))
 const material = new THREE.RawShaderMaterial({
   vertexShader: testVertexShader,
   fragmentShader: testFragmentShader,
-  transparent: true
+  uniforms: {
+    uFrequency: { value: new THREE.Vector2(10, 5) },
+    uTime: { value: 0 },
+    uColor: { value: new THREE.Color('orange')}
+  }
 })
+
+gui.add(material.uniforms.uFrequency.value, 'x').min(0).max(20).step(0.01).name('FreqencyX')
+gui.add(material.uniforms.uFrequency.value, 'y').min(0).max(20).step(0.01).name('FreqencyY')
 
 // Mesh
 const mesh = new THREE.Mesh(geometry, material)
+mesh.scale.y = 2 / 3
 scene.add(mesh)
 
 /**
@@ -101,6 +109,9 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // Update material
+    material.uniforms.uTime.value = elapsedTime
 
     // Update controls
     controls.update()
