@@ -86,8 +86,15 @@ void main() {
   // float strength = floor(vUv.x * 10.0) / 10.0;
   // strength *= floor(vUv.y * 10.0) / 10.0;
 
-  // Pattern 23
-  float strength = random(vUv);
+  // // Pattern 23
+  // float strength = random(vUv);
+
+  // Pattern 24
+  vec2 gridUv = vec2(
+    floor(vUv.x * 10.0) / 10.0,
+    floor(vUv.y * 10.0) / 10.0
+  );
+  float strength = random(gridUv);
 
 
   gl_FragColor = vec4(strength, strength, strength, 1.0);
