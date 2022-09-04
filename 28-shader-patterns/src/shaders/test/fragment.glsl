@@ -1,8 +1,11 @@
 varying vec2 vUv;
 
 void main() {
-  // Pattern 3
-  float strength = vUv.x;
+  // // Pattern 3
+  // float strength = vUv.x;
 
-  gl_FragColor = vec4(vUv.x, vUv.x, vUv.x, 1.0);
+  // Pattern 4
+  float strength = vUv.y;
+
+  gl_FragColor = vec4(strength, strength, strength, 1.0);
 }
