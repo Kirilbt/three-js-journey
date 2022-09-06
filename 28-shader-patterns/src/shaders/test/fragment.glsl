@@ -1,5 +1,7 @@
 #define PI 3.14159265359
 
+uniform float uTime;
+
 varying vec2 vUv;
 
 float random(vec2 st) {
@@ -104,14 +106,14 @@ void main() {
 
   // float strength = barX + barY;
 
-  // Pattern 15
-  float barX = step(0.4, mod(vUv.x * 10.0, 1.0));
-  barX *= step(0.8, mod(vUv.y * 10.0 + 0.2, 1.0));
+  // // Pattern 15
+  // float barX = step(0.4, mod(vUv.x * 10.0, 1.0));
+  // barX *= step(0.8, mod(vUv.y * 10.0 + 0.2, 1.0));
 
-  float barY = step(0.8, mod(vUv.x * 10.0 + 0.2, 1.0));
-  barY *= step(0.4, mod(vUv.y * 10.0, 1.0));
+  // float barY = step(0.8, mod(vUv.x * 10.0 + 0.2, 1.0));
+  // barY *= step(0.4, mod(vUv.y * 10.0, 1.0));
 
-  float strength = barX + barY;
+  // float strength = barX + barY;
 
   // // Pattern 16
   // float strength = abs(vUv.x - 0.5);
@@ -269,8 +271,8 @@ void main() {
   // // Pattern 46
   // float strength = cnoise(vUv * 10.0);
 
-  // // Pattern 47
-  // float strength = step(0.0, cnoise(vUv * 10.0));
+  // Pattern 47
+  float strength = step(0.0, cnoise(vUv * 10.0));
 
   // // Pattern 48
   // float strength = 1.0 - abs(cnoise(vUv * 10.0));
