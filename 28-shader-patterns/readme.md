@@ -1,3 +1,5 @@
+![shader-patterns](https://user-images.githubusercontent.com/98451613/188470910-cc931aac-d3b3-4711-8ca5-3940396be40d.gif)
+
 # Three.js Journey
 
 ## Setup
