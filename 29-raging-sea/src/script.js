@@ -18,11 +18,17 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+// Background
+debugObject.fogColor = '#fef5ff'
+
+scene.background = new THREE.Color(debugObject.fogColor)
+scene.fog = new THREE.Fog(debugObject.fogColor, 0.5, 3)
+
 /**
  * Water
  */
 // Geometry
-const waterGeometry = new THREE.PlaneGeometry(2, 2, 512, 512)
+const waterGeometry = new THREE.PlaneGeometry(5 , 5, 512, 512)
 
 // Colors
 debugObject.depthColor = '#283c8a'
@@ -32,6 +38,7 @@ debugObject.surfaceColor = '#a8d9ff'
 const waterMaterial = new THREE.ShaderMaterial({
   vertexShader: waterVertexShader,
   fragmentShader: waterFragmentShader,
+  fog: true,
   uniforms: {
     uTime: { value: 0 },
 
@@ -47,7 +54,11 @@ const waterMaterial = new THREE.ShaderMaterial({
     uDepthColor: { value: new THREE.Color(debugObject.depthColor) },
     uSurfaceColor: { value: new THREE.Color(debugObject.surfaceColor) },
     uColorOffset: { value: 0.1 },
-    uColorMultiplier: { value: 3 }
+    uColorMultiplier: { value: 3 },
+
+    fogColor: { value: scene.fog.color },
+    fogNear: { value: scene.fog.near },
+    fogFar: { value: scene.fog.far }
   }
 })
 
@@ -62,6 +73,12 @@ gui.add(waterMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).ste
 gui.add(waterMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('uSmallWavesSpeed')
 gui.add(waterMaterial.uniforms.uSmallWavesIterations, 'value').min(0).max(5).step(1).name('uSmallWavesIterations')
 
+gui.addColor(debugObject, 'fogColor')
+   .name('fogColor')
+   .onChange(() => {
+    scene.background.set(debugObject.fogColor)
+    scene.fog.color.set(debugObject.fogColor)
+   })
 gui.addColor(debugObject, 'depthColor')
    .name('depthColor')
    .onChange(() => {
