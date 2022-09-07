@@ -57,7 +57,7 @@ void main() {
   vec3 color = mix(uDepthColor, uSurfaceColor, mixStrength);
 
   float foam = 1.0 - abs(cnoise(vUv * 8.0));
-  color += (foam * 0.5);
+  color += foam * 0.5;
 
   gl_FragColor = vec4(color, 1.0);
 
