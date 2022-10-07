@@ -1,3 +1,7 @@
+uniform float uSize;
+
+attribute float aScale;
+
 void main() {
   /**
     * Position
@@ -10,5 +14,6 @@ void main() {
   /**
     * Size
     */
-  gl_PointSize = 2.0;
+  gl_PointSize = uSize * aScale;
+  gl_PointSize *= (1.0 / - viewPosition.z);
 }
