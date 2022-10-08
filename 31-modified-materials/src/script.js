@@ -53,7 +53,7 @@ const environmentMap = cubeTextureLoader.load([
 ])
 environmentMap.encoding = THREE.sRGBEncoding
 
-scene.background = environmentMap
+// scene.background = environmentMap
 scene.environment = environmentMap
 
 /**
@@ -100,7 +100,7 @@ material.onBeforeCompile = (shader) => {
     `
       #include <beginnormal_vertex>
 
-      float angle = (position.y + uTime) * 0.9;
+      float angle = sin(position.y + uTime) * 0.4;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       objectNormal.xz = rotateMatrix * objectNormal.xz;
@@ -136,7 +136,7 @@ depthMaterial.onBeforeCompile = (shader) => {
     `
       #include <begin_vertex>
 
-      float angle = (position.y + uTime) * 0.9;
+      float angle = sin(position.y + uTime) * 0.4;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       transformed.xz = rotateMatrix * transformed.xz;
@@ -162,19 +162,6 @@ gltfLoader.load(
         updateAllMaterials()
     }
 )
-
-/**
- * Plane
- */
-
-const plane = new THREE.Mesh(
-  new THREE.PlaneGeometry(15, 15, 15),
-  new THREE.MeshStandardMaterial()
-)
-plane.rotation.y = Math.PI
-plane.position.y = -5
-plane.position.z = 5
-scene.add(plane)
 
 /**
  * Lights
