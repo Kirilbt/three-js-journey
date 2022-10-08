@@ -74,9 +74,24 @@ const material = new THREE.MeshStandardMaterial( {
 
 material.onBeforeCompile = (shader) => {
   shader.vertexShader = shader.vertexShader.replace(
+    '#include <common>',
+    `
+      #include <common>
+
+      mat2 get2dRotateMatrix(float _angle) {
+        return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
+      }
+    `
+  )
+  shader.vertexShader = shader.vertexShader.replace(
     '#include <begin_vertex>',
     `
       #include <begin_vertex>
+
+      float angle = position.y * 0.3;
+      mat2 rotateMatrix = get2dRotateMatrix(angle);
+
+      transformed.xz = rotateMatrix * transformed.xz;
     `
   )
 }
