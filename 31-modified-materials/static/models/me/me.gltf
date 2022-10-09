@@ -80,8 +80,8 @@
     "images" : [
         {
             "mimeType" : "image/jpeg",
-            "name" : "Image_1",
-            "uri" : "textures/Image_1.jpg"
+            "name" : "normal",
+            "uri" : "textures/normal.jpg"
         },
         {
             "mimeType" : "image/jpeg",
@@ -90,8 +90,8 @@
         },
         {
             "mimeType" : "image/jpeg",
-            "name" : "Image_0",
-            "uri" : "textures/Image_0.jpg"
+            "name" : "color",
+            "uri" : "textures/color.jpg"
         }
     ],
     "accessors" : [
