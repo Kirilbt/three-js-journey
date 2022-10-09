@@ -1,0 +1,167 @@
+{
+    "asset" : {
+        "copyright" : "kiril.ch",
+        "generator" : "Khronos glTF Blender I/O v1.8.19",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Mesh_0",
+            "rotation" : [
+                0,
+                0.10675310343503952,
+                0,
+                0.9942855834960938
+            ],
+            "translation" : [
+                0.1514907330274582,
+                0.04378485307097435,
+                -0.11680489033460617
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "name" : "Material_0",
+            "normalTexture" : {
+                "index" : 0
+            },
+            "occlusionTexture" : {
+                "index" : 1
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 2
+                },
+                "metallicFactor" : 0
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh_0",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        },
+        {
+            "sampler" : 0,
+            "source" : 1
+        },
+        {
+            "sampler" : 0,
+            "source" : 2
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Image_1",
+            "uri" : "textures/Image_1.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Image_2",
+            "uri" : "textures/Image_2.jpg"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Image_0",
+            "uri" : "textures/Image_0.jpg"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 120411,
+            "max" : [
+                0.05380120128393173,
+                0.26831620931625366,
+                0.2674121558666229
+            ],
+            "min" : [
+                -0.3705800175666809,
+                -0.11974139511585236,
+                -0.03168407827615738
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 120411,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 120411,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5125,
+            "count" : 120411,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 1444932,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1444932,
+            "byteOffset" : 1444932
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 963288,
+            "byteOffset" : 2889864
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 481644,
+            "byteOffset" : 3853152
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 4334796,
+            "uri" : "me.bin"
+        }
+    ]
+}

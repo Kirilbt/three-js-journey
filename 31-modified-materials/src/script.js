@@ -32,7 +32,7 @@ const updateAllMaterials = () =>
     {
         if(child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial)
         {
-            child.material.envMapIntensity = 1
+            child.material.envMapIntensity = 2
             child.material.needsUpdate = true
             child.castShadow = true
             child.receiveShadow = true
@@ -61,10 +61,11 @@ scene.environment = environmentMap
  */
 
 // Textures
-const mapTexture = textureLoader.load('/models/LeePerrySmith/color.jpg')
+const mapTexture = textureLoader.load('/models/me/textures/color.jpg')
 mapTexture.encoding = THREE.sRGBEncoding
+mapTexture.flipY = false;
 
-const normalTexture = textureLoader.load('/models/LeePerrySmith/normal.jpg')
+const normalTexture = textureLoader.load('/models/me/textures/normal.jpg')
 
 // Material
 const material = new THREE.MeshStandardMaterial( {
@@ -100,7 +101,7 @@ material.onBeforeCompile = (shader) => {
     `
       #include <beginnormal_vertex>
 
-      float angle = sin(position.y + uTime) * 0.4;
+      float angle = sin(position.y + uTime) * 0.9;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       objectNormal.xz = rotateMatrix * objectNormal.xz;
@@ -136,7 +137,7 @@ depthMaterial.onBeforeCompile = (shader) => {
     `
       #include <begin_vertex>
 
-      float angle = sin(position.y + uTime) * 0.4;
+      float angle = sin(position.y + uTime) * 0.9;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       transformed.xz = rotateMatrix * transformed.xz;
@@ -148,12 +149,13 @@ depthMaterial.onBeforeCompile = (shader) => {
  * Models
  */
 gltfLoader.load(
-    '/models/LeePerrySmith/LeePerrySmith.glb',
+    '/models/me/me.gltf',
     (gltf) =>
     {
         // Model
         const mesh = gltf.scene.children[0]
-        mesh.rotation.y = Math.PI * 0.5
+        mesh.scale.set(9, 9, 9)
+        mesh.rotation.y = Math.PI
         mesh.material = material
         mesh.customDepthMaterial = depthMaterial
         scene.add(mesh)
