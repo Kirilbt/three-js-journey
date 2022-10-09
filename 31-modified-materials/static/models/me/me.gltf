@@ -67,8 +67,8 @@
     "images" : [
         {
             "mimeType" : "image/jpeg",
-            "name" : "Diffuse",
-            "uri" : "textures/Diffuse.jpg"
+            "name" : "color",
+            "uri" : "textures/color.jpg"
         }
     ],
     "accessors" : [
