@@ -1,6 +1,5 @@
 {
     "asset" : {
-        "copyright" : "kiril.ch",
         "generator" : "Khronos glTF Blender I/O v1.8.19",
         "version" : "2.0"
     },
@@ -16,34 +15,30 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Mesh_0",
+            "name" : "Low Res",
             "rotation" : [
                 0,
-                0.10675310343503952,
+                0.17012135684490204,
                 0,
-                0.9942855834960938
+                0.9854230880737305
             ],
             "translation" : [
-                0.1514907330274582,
+                0.10852368921041489,
                 0.04378485307097435,
-                -0.11680489033460617
+                -0.12691478431224823
             ]
         }
     ],
     "materials" : [
         {
-            "name" : "Material_0",
-            "normalTexture" : {
-                "index" : 0
-            },
-            "occlusionTexture" : {
-                "index" : 1
-            },
+            "doubleSided" : true,
+            "name" : "Material.001",
             "pbrMetallicRoughness" : {
                 "baseColorTexture" : {
-                    "index" : 2
+                    "index" : 0
                 },
-                "metallicFactor" : 0
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
             }
         }
     ],
@@ -67,89 +62,71 @@
         {
             "sampler" : 0,
             "source" : 0
-        },
-        {
-            "sampler" : 0,
-            "source" : 1
-        },
-        {
-            "sampler" : 0,
-            "source" : 2
         }
     ],
     "images" : [
         {
             "mimeType" : "image/jpeg",
-            "name" : "normal",
-            "uri" : "textures/normal.jpg"
-        },
-        {
-            "mimeType" : "image/jpeg",
-            "name" : "Image_2",
-            "uri" : "textures/Image_2.jpg"
-        },
-        {
-            "mimeType" : "image/jpeg",
-            "name" : "color",
-            "uri" : "textures/color.jpg"
+            "name" : "Diffuse",
+            "uri" : "textures/Diffuse.jpg"
         }
     ],
     "accessors" : [
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 120411,
+            "count" : 14220,
             "max" : [
-                0.05380120128393173,
-                0.26831620931625366,
-                0.2674121558666229
+                0.03781050071120262,
+                0.26786187291145325,
+                0.26726076006889343
             ],
             "min" : [
-                -0.3705800175666809,
-                -0.11974139511585236,
-                -0.03168407827615738
+                -0.34428566694259644,
+                -0.05852538347244263,
+                -0.02732820436358452
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 120411,
+            "count" : 14220,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 120411,
+            "count" : 14220,
             "type" : "VEC2"
         },
         {
             "bufferView" : 3,
-            "componentType" : 5125,
-            "count" : 120411,
+            "componentType" : 5123,
+            "count" : 63654,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 1444932,
+            "byteLength" : 170640,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 1444932,
-            "byteOffset" : 1444932
+            "byteLength" : 170640,
+            "byteOffset" : 170640
         },
         {
             "buffer" : 0,
-            "byteLength" : 963288,
-            "byteOffset" : 2889864
+            "byteLength" : 113760,
+            "byteOffset" : 341280
         },
         {
             "buffer" : 0,
-            "byteLength" : 481644,
-            "byteOffset" : 3853152
+            "byteLength" : 127308,
+            "byteOffset" : 455040
         }
     ],
     "samplers" : [
@@ -160,7 +137,7 @@
     ],
     "buffers" : [
         {
-            "byteLength" : 4334796,
+            "byteLength" : 582348,
             "uri" : "me.bin"
         }
     ]

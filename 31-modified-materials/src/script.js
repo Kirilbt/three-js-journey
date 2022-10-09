@@ -70,7 +70,7 @@ const normalTexture = textureLoader.load('/models/me/textures/normal.jpg')
 // Material
 const material = new THREE.MeshStandardMaterial( {
     map: mapTexture,
-    normalMap: normalTexture
+    // normalMap: normalTexture
 })
 
 const depthMaterial = new THREE.MeshDepthMaterial({
@@ -101,7 +101,7 @@ material.onBeforeCompile = (shader) => {
     `
       #include <beginnormal_vertex>
 
-      float angle = sin(position.y + uTime) * 0.9;
+      float angle = sin(position.y + uTime) * 1.5;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       objectNormal.xz = rotateMatrix * objectNormal.xz;
@@ -137,7 +137,7 @@ depthMaterial.onBeforeCompile = (shader) => {
     `
       #include <begin_vertex>
 
-      float angle = sin(position.y + uTime) * 0.9;
+      float angle = sin(position.y + uTime) * 1.5;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       transformed.xz = rotateMatrix * transformed.xz;
