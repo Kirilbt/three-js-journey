@@ -304,9 +304,9 @@ const InterfaceShader = {
     varying vec2 vUv;
 
     void main() {
-      vec3 normalColor = texture2D(uNormalMap, vUv).rgb * 2.0 - 1.0;
+      vec3 normalColor = texture2D(uNormalMap, vUv).xyz * 2.0 - 1.0;
 
-      vec2 newUv = vUv + normalColor.rg * 0.1;
+      vec2 newUv = vUv + normalColor.xy * 0.1;
       vec4 color = texture2D(tDiffuse, newUv);
 
       vec3 lightDirection = normalize(vec3( -1.0, 1.0, 0.0));
@@ -319,6 +319,7 @@ const InterfaceShader = {
 }
 
 const interfacePass = new ShaderPass(InterfaceShader)
+interfacePass.enabled = false
 interfacePass.material.uniforms.uNormalMap.value =  textureLoader.load('/textures/interfaceNormalMap.png')
 effectComposer.addPass(interfacePass)
 
