@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import * as dat from 'lil-gui'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { DotScreenPass } from 'three/examples/jsm/postprocessing/DotScreenPass.js'
@@ -11,9 +12,6 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js'
 import { GammaCorrectionShader} from 'three/examples/jsm/shaders/GammaCorrectionShader.js'
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js'
-import * as dat from 'lil-gui'
-
-
 
 /**
  * Base
@@ -235,13 +233,14 @@ const TintShader = {
 }
 
 const tintPass = new ShaderPass(TintShader)
+tintPass.enabled = false
 tintPass.material.uniforms.uTint.value = new THREE.Vector3()
 effectComposer.addPass(tintPass)
 
 gui.add(tintPass, 'enabled').name('tintPass')
-gui.add(tintPass.material.uniforms.uTint.value, 'x').min(- 1).max(1).step(0.001).name('red')
-gui.add(tintPass.material.uniforms.uTint.value, 'y').min(- 1).max(1).step(0.001).name('green')
-gui.add(tintPass.material.uniforms.uTint.value, 'z').min(- 1).max(1).step(0.001).name('blue')
+gui.add(tintPass.material.uniforms.uTint.value, 'x').min(- 1).max(1).step(0.001).name('tintPass_red')
+gui.add(tintPass.material.uniforms.uTint.value, 'y').min(- 1).max(1).step(0.001).name('tintPass_green')
+gui.add(tintPass.material.uniforms.uTint.value, 'z').min(- 1).max(1).step(0.001).name('tintPass_blue')
 
 // Displacement Pass - Custom Shader
 const DisplacementShader = {
@@ -329,10 +328,12 @@ gui.add(interfacePass, 'enabled').name('interfacePass')
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader)
 effectComposer.addPass(gammaCorrectionPass)
 
-// SMAA Pass
+// Antialias Pass
 if(renderer.getPixelRatio() === 1 && !renderer.capabilities.isWebGL2) {
   const smaaPass = new SMAAPass()
   effectComposer.addPass(smaaPass)
+
+  console.log('using SMAA');
 }
 
 /**
