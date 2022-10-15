@@ -192,9 +192,9 @@ unrealBloomPass.threshold = 0.6
 effectComposer.addPass(unrealBloomPass)
 
 gui.add(unrealBloomPass, 'enabled').name('unrealBloomPass')
-gui.add(unrealBloomPass, 'strength').min(0).max(2).step(0.001)
-gui.add(unrealBloomPass, 'radius').min(0).max(2).step(0.001)
-gui.add(unrealBloomPass, 'threshold').min(0).max(1).step(0.001)
+gui.add(unrealBloomPass, 'strength').min(0).max(2).step(0.001).name('unrealBloomPass_strength')
+gui.add(unrealBloomPass, 'radius').min(0).max(2).step(0.001).name('unrealBloomPass_radius')
+gui.add(unrealBloomPass, 'threshold').min(0).max(1).step(0.001).name('unrealBloomPass_threshold')
 
 // RGB Shift Pass
 const rgbShiftPass = new ShaderPass(RGBShiftShader)
