@@ -187,6 +187,7 @@ gui.add(glitchPass, 'goWild').name('glitchPass_goWild')
 
 // Unreal Bloom Pass
 const unrealBloomPass = new UnrealBloomPass()
+unrealBloomPass.enabled = false
 unrealBloomPass.strength = 0.3
 unrealBloomPass.radius = 1
 unrealBloomPass.threshold = 0.6
@@ -275,10 +276,53 @@ const DisplacementShader = {
 }
 
 const displacementPass = new ShaderPass(DisplacementShader)
+displacementPass.enabled = false
 displacementPass.material.uniforms.uTime.value = 0
 effectComposer.addPass(displacementPass)
 
 gui.add(displacementPass, 'enabled').name('displacementPass')
+
+// Interface Pass - Custom Shader
+const InterfaceShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    uNormalMap: { value: null }
+  },
+  vertexShader: `
+    varying vec2 vUv;
+
+    void main() {
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
+      vUv = uv;
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform sampler2D uNormalMap;
+
+    varying vec2 vUv;
+
+    void main() {
+      vec3 normalColor = texture2D(uNormalMap, vUv).rgb * 2.0 - 1.0;
+
+      vec2 newUv = vUv + normalColor.rg * 0.1;
+      vec4 color = texture2D(tDiffuse, newUv);
+
+      vec3 lightDirection = normalize(vec3( -1.0, 1.0, 0.0));
+      float lightness = clamp(dot(normalColor, lightDirection), 0.0, 1.0);
+      color.rgb += lightness * 2.0;
+
+      gl_FragColor = color;
+    }
+  `
+}
+
+const interfacePass = new ShaderPass(InterfaceShader)
+interfacePass.material.uniforms.uNormalMap.value =  textureLoader.load('/textures/interfaceNormalMap.png')
+effectComposer.addPass(interfacePass)
+
+gui.add(interfacePass, 'enabled').name('interfacePass')
 
 // Gamma Correction Pass
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader)
