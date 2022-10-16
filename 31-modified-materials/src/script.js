@@ -267,8 +267,9 @@ dotScreenPass.enabled = false
 dotScreenPass.uniforms[ 'scale' ].value = 1;
 effectComposer.addPass(dotScreenPass)
 
-gui.add(dotScreenPass, 'enabled').name('dotScreenPass')
-gui.add(dotScreenPass.uniforms[ 'scale' ], 'value').min(0).max(1).step(0.001).name('dotScreenPass_scale')
+const dotScreenPassFolder = gui.addFolder( 'Dot Screen Pass' );
+dotScreenPassFolder.add(dotScreenPass, 'enabled')
+dotScreenPassFolder.add(dotScreenPass.uniforms[ 'scale' ], 'value', 0, 1, 0.001)
 
 // Glitch Pass
 const glitchPass = new GlitchPass()
@@ -276,8 +277,9 @@ glitchPass.goWild = false
 glitchPass.enabled = false
 effectComposer.addPass(glitchPass)
 
-gui.add(glitchPass, 'enabled').name('glitchPass')
-gui.add(glitchPass, 'goWild').name('glitchPass_goWild')
+const glitchPassFolder = gui.addFolder( 'Glitch Pass' );
+glitchPassFolder.add(glitchPass, 'enabled')
+glitchPassFolder.add(glitchPass, 'goWild')
 
 // Unreal Bloom Pass
 const unrealBloomPass = new UnrealBloomPass()
@@ -287,17 +289,21 @@ unrealBloomPass.radius = 1
 unrealBloomPass.threshold = 0.6
 effectComposer.addPass(unrealBloomPass)
 
-gui.add(unrealBloomPass, 'enabled').name('unrealBloomPass')
-gui.add(unrealBloomPass, 'strength').min(0).max(2).step(0.001).name('unrealBloomPass_strength')
-gui.add(unrealBloomPass, 'radius').min(0).max(2).step(0.001).name('unrealBloomPass_radius')
-gui.add(unrealBloomPass, 'threshold').min(0).max(1).step(0.001).name('unrealBloomPass_threshold')
+const unrealBloomPassFolder = gui.addFolder( 'Unreal Bloom Pass' );
+unrealBloomPassFolder.add(unrealBloomPass, 'enabled')
+unrealBloomPassFolder.add(unrealBloomPass, 'strength', 0, 2, 0.001)
+unrealBloomPassFolder.add(unrealBloomPass, 'radius', 0, 2, 0.001)
+unrealBloomPassFolder.add(unrealBloomPass, 'threshold', 0, 1, 0.001)
 
 // RGB Shift Pass
 const rgbShiftPass = new ShaderPass(RGBShiftShader)
 rgbShiftPass.enabled = false
+rgbShiftPass.uniforms[ 'amount' ].value = 0.0015;
 effectComposer.addPass(rgbShiftPass)
 
-gui.add(rgbShiftPass, 'enabled').name('rgbShiftPass')
+const rgbShiftPassFolder = gui.addFolder( 'RGB Shift Pass' );
+rgbShiftPassFolder.add(rgbShiftPass, 'enabled')
+rgbShiftPassFolder.add(rgbShiftPass.uniforms[ 'amount' ], 'value', 0, 1, 0.001)
 
 // Gamma Correction Pass
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader)
