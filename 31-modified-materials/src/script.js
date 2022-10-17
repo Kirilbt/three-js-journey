@@ -87,11 +87,16 @@ const depthMaterial = new THREE.MeshDepthMaterial({
 })
 
 const customUniforms = {
-  uTime: { value: 0 }
+  uTime: { value: 0 },
+  uAngleModifier: { value: 1.5}
 }
+
+const distortion = gui.addFolder( 'Distortion' );
+distortion.add(customUniforms.uAngleModifier, 'value', 0, 15, 0.01)
 
 material.onBeforeCompile = (shader) => {
   shader.uniforms.uTime = customUniforms.uTime
+  shader.uniforms.uAngleModifier = customUniforms.uAngleModifier
 
   shader.vertexShader = shader.vertexShader.replace(
     '#include <common>',
@@ -99,6 +104,7 @@ material.onBeforeCompile = (shader) => {
       #include <common>
 
       uniform float uTime;
+      uniform float uAngleModifier;
 
       mat2 get2dRotateMatrix(float _angle) {
         return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
@@ -110,7 +116,7 @@ material.onBeforeCompile = (shader) => {
     `
       #include <beginnormal_vertex>
 
-      float angle = sin(position.y + uTime) * 1.5;
+      float angle = sin(position.y + uTime) * uAngleModifier;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       objectNormal.xz = rotateMatrix * objectNormal.xz;
@@ -128,6 +134,7 @@ material.onBeforeCompile = (shader) => {
 
 depthMaterial.onBeforeCompile = (shader) => {
   shader.uniforms.uTime = customUniforms.uTime
+  shader.uniforms.uAngleModifier = customUniforms.uAngleModifier
 
   shader.vertexShader = shader.vertexShader.replace(
     '#include <common>',
@@ -135,6 +142,7 @@ depthMaterial.onBeforeCompile = (shader) => {
       #include <common>
 
       uniform float uTime;
+      uniform float uAngleModifier;
 
       mat2 get2dRotateMatrix(float _angle) {
         return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
@@ -146,7 +154,7 @@ depthMaterial.onBeforeCompile = (shader) => {
     `
       #include <begin_vertex>
 
-      float angle = sin(position.y + uTime) * 1.5;
+      float angle = sin(position.y + uTime) * uAngleModifier;
       mat2 rotateMatrix = get2dRotateMatrix(angle);
 
       transformed.xz = rotateMatrix * transformed.xz;
