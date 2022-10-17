@@ -305,6 +305,92 @@ const rgbShiftPassFolder = gui.addFolder( 'RGB Shift Pass' );
 rgbShiftPassFolder.add(rgbShiftPass, 'enabled')
 rgbShiftPassFolder.add(rgbShiftPass.uniforms[ 'amount' ], 'value', 0, 1, 0.001)
 
+// Tint Pass - Custom Shader
+const TintShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    uTint: { value: null }
+  },
+  vertexShader: `
+    varying vec2 vUv;
+
+    void main() {
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
+      vUv = uv;
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform vec3 uTint;
+
+    varying vec2 vUv;
+
+    void main() {
+      vec4 color = texture2D(tDiffuse, vUv);
+      color.rgb += uTint;
+      gl_FragColor = color;
+    }
+  `
+}
+
+const tintPass = new ShaderPass(TintShader)
+tintPass.enabled = false
+tintPass.material.uniforms.uTint.value = new THREE.Vector3()
+effectComposer.addPass(tintPass)
+
+const tintPassFolder = gui.addFolder( 'Tint Pass' );
+tintPassFolder.add(tintPass, 'enabled')
+tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'x', -1, 1, 0.001)
+tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'y', -1, 1, 0.001)
+tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'z', -1, 1, 0.001)
+
+// Displacement Pass - Custom Shader
+const DisplacementShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    uTime: { value: null },
+    uUvModifier: { value: 10.0 },
+    uSinModifier: { value: 0.1}
+  },
+  vertexShader: `
+    varying vec2 vUv;
+
+    void main() {
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
+      vUv = uv;
+    }
+  `,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform float uTime;
+    uniform float uUvModifier;
+    uniform float uSinModifier;
+
+    varying vec2 vUv;
+
+    void main() {
+      vec2 newUv = vec2(
+        vUv.x,
+        vUv.y + sin(vUv.x * uUvModifier + uTime) * uSinModifier
+      );
+      vec4 color = texture2D(tDiffuse, newUv);
+      gl_FragColor = color;
+    }
+  `
+}
+
+const displacementPass = new ShaderPass(DisplacementShader)
+displacementPass.enabled = false
+displacementPass.material.uniforms.uTime.value = 0
+effectComposer.addPass(displacementPass)
+
+const displacementPassFolder = gui.addFolder( 'Diplacement Pass' );
+displacementPassFolder.add(displacementPass, 'enabled')
+displacementPassFolder.add(displacementPass.material.uniforms.uUvModifier, 'value', -25, 25, 0.01).name('uv modifier')
+displacementPassFolder.add(displacementPass.material.uniforms.uSinModifier, 'value', -1, 1, 0.001).name('sin modifier')
+
 // Gamma Correction Pass
 const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader)
 effectComposer.addPass(gammaCorrectionPass)
