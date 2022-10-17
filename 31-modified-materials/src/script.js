@@ -341,9 +341,9 @@ effectComposer.addPass(tintPass)
 
 const tintPassFolder = gui.addFolder( 'Tint Pass' );
 tintPassFolder.add(tintPass, 'enabled')
-tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'x', -1, 1, 0.001)
-tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'y', -1, 1, 0.001)
-tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'z', -1, 1, 0.001)
+tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'x', -1, 1, 0.001).name('r')
+tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'y', -1, 1, 0.001).name('g')
+tintPassFolder.add(tintPass.material.uniforms.uTint.value, 'z', -1, 1, 0.001).name('b')
 
 // Displacement Pass - Custom Shader
 const DisplacementShader = {
