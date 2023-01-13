@@ -129,10 +129,20 @@ gltfLoader.load(
  * Points of Interest
  */
 const raycaster = new Raycaster()
-const points = [{
-  position: new THREE.Vector3(1.55, 0.3, -0.6),
-  element: document.querySelector('.point-0')
-}]
+const points = [
+  {
+    position: new THREE.Vector3(1.55, 0.3, -0.6),
+    element: document.querySelector('.point-0')
+  },
+  {
+    position: new THREE.Vector3(0.5, 0.8, -1.6),
+    element: document.querySelector('.point-1')
+  },
+  {
+    position: new THREE.Vector3(1.6, -1.3, -0.7),
+    element: document.querySelector('.point-2')
+  },
+]
 
 
 /**
