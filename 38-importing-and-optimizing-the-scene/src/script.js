@@ -57,14 +57,12 @@ const portalLightMaterial = new THREE.MeshBasicMaterial({ color: 0xfff1db })
 gltfLoader.load(
   'portal.glb',
   (gltf) => {
-    gltf.scene.traverse((child) => {
-      child.material = bakedMaterial
-    })
-
+    const bakedMesh = gltf.scene.children.find(child => child.name === 'baked')
     const lampLightAMesh = gltf.scene.children.find(child => child.name === 'lampLight')
     const lampLightBMesh = gltf.scene.children.find(child => child.name === 'lampLight001')
     const portalLightMesh = gltf.scene.children.find(child => child.name === 'portalLight')
 
+    bakedMesh.material = bakedMaterial
     lampLightAMesh.material = lampLightMaterial
     lampLightBMesh.material = lampLightMaterial
     portalLightMesh.material = portalLightMaterial
