@@ -37,6 +37,7 @@ gltfLoader.setDRACOLoader(dracoLoader)
  */
 const bakedTexture = textureLoader.load('baked.jpg')
 bakedTexture.flipY = false
+bakedTexture.encoding = THREE.sRGBEncoding
 
 /**
  * Materials
@@ -103,6 +104,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.outputEncoding = THREE.sRGBEncoding
 
 /**
  * Animate
