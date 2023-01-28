@@ -45,6 +45,12 @@ bakedTexture.encoding = THREE.sRGBEncoding
 // Baked Material
 const bakedMaterial = new THREE.MeshBasicMaterial({ map: bakedTexture })
 
+// Lamp Light Material
+const lampLightMaterial = new THREE.MeshBasicMaterial({ color: 0xfff1db })
+
+// Portal Light Material
+const portalLightMaterial = new THREE.MeshBasicMaterial({ color: 0xfff1db })
+
 /**
  * Model
  */
@@ -54,6 +60,15 @@ gltfLoader.load(
     gltf.scene.traverse((child) => {
       child.material = bakedMaterial
     })
+
+    const lampLightAMesh = gltf.scene.children.find(child => child.name === 'lampLight')
+    const lampLightBMesh = gltf.scene.children.find(child => child.name === 'lampLight001')
+    const portalLightMesh = gltf.scene.children.find(child => child.name === 'portalLight')
+
+    lampLightAMesh.material = lampLightMaterial
+    lampLightBMesh.material = lampLightMaterial
+    portalLightMesh.material = portalLightMaterial
+
     scene.add(gltf.scene)
   }
 )
