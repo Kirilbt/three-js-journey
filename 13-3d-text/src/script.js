@@ -21,8 +21,8 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
-scene.background = new THREE.Color( 0xf57120 );
-scene.fog = new THREE.Fog(0xf57120, 1, 11)
+scene.background = new THREE.Color( 0x1940ff );
+scene.fog = new THREE.Fog(0x1940ff, 1, 11)
 
 gui
     .addColor(params, 'color')
