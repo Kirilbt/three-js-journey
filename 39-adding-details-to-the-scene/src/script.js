@@ -74,6 +74,30 @@ gltfLoader.load(
 )
 
 /**
+ * Fireflies
+ */
+// Geometry
+const firefliesGeometry = new THREE.BufferGeometry()
+const firefliesCount = 30
+const firefliesPosition = new Float32Array(firefliesCount * 3)
+
+for (let i = 0; i < firefliesCount; i++) {
+  firefliesPosition[i * 3 + 0] = (Math.random() - 0.5) * 4
+  firefliesPosition[i * 3 + 1] = Math.random() * 1.75
+  firefliesPosition[i * 3 + 2] = (Math.random() - 0.5) * 4
+}
+
+firefliesGeometry.setAttribute('position', new THREE.BufferAttribute(firefliesPosition, 3))
+
+// Material
+const firefliesMaterial = new THREE.PointsMaterial({ size: 0.1, sizeAttenuation: true})
+
+// Points
+const fireflies = new THREE.Points(firefliesGeometry, firefliesMaterial)
+scene.add(fireflies)
+
+
+/**
  * Sizes
  */
 const sizes = {
@@ -108,14 +132,13 @@ scene.add(camera)
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
-controls.maxPolarAngle = Math.PI / 2
 
 /**
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true
+  canvas: canvas,
+  antialias: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -124,10 +147,10 @@ renderer.outputEncoding = THREE.sRGBEncoding
 debugObject.clearColor = '#322d1a'
 renderer.setClearColor(debugObject.clearColor)
 gui
-  .addColor(debugObject, 'clearColor')
-  .onChange(() => {
-    renderer.setClearColor(debugObject.clearColor)
-  })
+.addColor(debugObject, 'clearColor')
+.onChange(() => {
+  renderer.setClearColor(debugObject.clearColor)
+})
 
 /**
  * Animate
