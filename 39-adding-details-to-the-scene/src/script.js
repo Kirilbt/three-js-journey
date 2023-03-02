@@ -110,7 +110,7 @@ const scaleArray = new Float32Array(firefliesCount)
 
 for (let i = 0; i < firefliesCount; i++) {
   positionArray[i * 3 + 0] = (Math.random() - 0.5) * 4
-  positionArray[i * 3 + 1] = Math.random() * 1.75
+  positionArray[i * 3 + 1] = Math.random() * 1.8
   positionArray[i * 3 + 2] = (Math.random() - 0.5) * 4
 
   scaleArray[i] = Math.random()
