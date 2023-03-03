@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function Clicker({ keyName, color = 'darkORchid' }) {
+export default function Clicker({ increment, keyName, color }) {
   const [ count, setCount ] = useState(parseInt(localStorage.getItem(keyName) ?? 0))
 
   useEffect(() => {
@@ -15,6 +15,7 @@ export default function Clicker({ keyName, color = 'darkORchid' }) {
 
   const buttonCLick = () => {
     setCount(count + 1)
+    increment()
   }
 
   return <div>
