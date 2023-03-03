@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 
-export default function Clicker() {
-  const [ count, setCount ] = useState(parseInt(localStorage.getItem('count') ?? 0))
+export default function Clicker({ keyName, color = 'darkORchid' }) {
+  const [ count, setCount ] = useState(parseInt(localStorage.getItem(keyName) ?? 0))
 
   useEffect(() => {
     return () => {
-      localStorage.removeItem('count')
+      localStorage.removeItem(keyName)
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('count', count)
+    localStorage.setItem(keyName, count)
   }, [ count ])
 
   const buttonCLick = () => {
@@ -18,7 +18,7 @@ export default function Clicker() {
   }
 
   return <div>
-    <div>Clicks count: { count }</div>
+    <div style={{ color: color }}>Clicks count: { count }</div>
     <button onClick={ buttonCLick }>Click me</button>
   </div>
 }
